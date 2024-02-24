@@ -28,7 +28,7 @@ app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
 app.use(
   cors({
-    origin: 'https://yourplaces-6bee5.web.app/', // Replace with your actual frontend domain
+    origin: 'https://yourplaces-6bee5.web.app', // Replace with your actual frontend domain
     credentials: true, // Allow sessions and cookies
   })
 );
@@ -36,7 +36,7 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     'Access-Control-Allow-Origin',
-    'https://yourplaces-6bee5.web.app/'
+    'https://yourplaces-6bee5.web.app'
   );
   res.setHeader(
     'Access-Control-Allow-Headers',
