@@ -18,7 +18,7 @@ const attachCookiesToResponse = (res, payload) => {
 
   res.cookie('token', token, {
     httpOnly: true,
-    expiresIn: new Date(Date.getTime() + oneHour),
+    expiresIn: new Date(Date().getTime() + oneHour),
     secure: process.env.NODE_ENV === 'production',
     // secure: true,
     sameSite: 'Strict',
