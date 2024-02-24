@@ -23,6 +23,7 @@ const attachCookiesToResponse = (res, payload) => {
     // secure: true,
     sameSite: 'Strict',
     signed: true,
+    domain: 'https://yourplaces-6bee5.web.app',
   });
 };
 
