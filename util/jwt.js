@@ -21,7 +21,7 @@ const attachCookiesToResponse = (res, payload) => {
     expires: new Date(Date.now() + oneHour),
     secure: process.env.NODE_ENV === 'production',
     // secure: true,
-    sameSite: 'Strict',
+    sameSite: 'None',
     signed: true,
     domain: 'https://yourplaces-6bee5.web.app',
   });
