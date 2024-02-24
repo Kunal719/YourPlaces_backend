@@ -28,13 +28,16 @@ app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
 app.use(
   cors({
-    origin: 'http://localhost:3000', // Replace with your actual frontend domain
+    origin: 'https://yourplaces-6bee5.web.app/', // Replace with your actual frontend domain
     credentials: true, // Allow sessions and cookies
   })
 );
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader(
+    'Access-Control-Allow-Origin',
+    'https://yourplaces-6bee5.web.app/'
+  );
   res.setHeader(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
