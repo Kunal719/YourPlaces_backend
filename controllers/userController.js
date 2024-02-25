@@ -1,7 +1,7 @@
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../errors');
 const User = require('../models/User');
-const { attachCookiesToResponse, createUserToken } = require('../util');
+const { createJWT, createUserToken } = require('../util');
 
 const getAllUsers = async (req, res, next) => {
   const users = await User.find().select('-password');
@@ -38,11 +38,13 @@ const register = async (req, res, next) => {
 
   // Setup JWT
   const tokenUser = createUserToken(newUser);
-  attachCookiesToResponse(res, tokenUser);
+
+  // create jwt token
+  const token = createJWT(tokenUser);
 
   // console.log(req.signedCookies);
 
-  res.status(StatusCodes.CREATED).json({ user: tokenUser });
+  res.status(StatusCodes.CREATED).json({ user: tokenUser, token: token });
 };
 
 const login = async (req, res, next) => {
@@ -66,17 +68,14 @@ const login = async (req, res, next) => {
 
   // If everything is fine
   const tokenUser = createUserToken(user);
-  attachCookiesToResponse(res, tokenUser);
 
-  res.status(StatusCodes.OK).json({ user: tokenUser });
+  // create jwt
+  const token = createJWT(tokenUser);
+
+  res.status(StatusCodes.OK).json({ user: tokenUser, token: token });
 };
 
 const logout = async (req, res, next) => {
-  res.cookie('token', null, {
-    httpOnly: true,
-    expires: new Date(Date.now()),
-  });
-
   res.status(StatusCodes.OK).json({ msg: 'Logged out succesfully' });
 };
 

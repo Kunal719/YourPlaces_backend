@@ -2,7 +2,10 @@ const CustomError = require('../errors');
 const { isVerifiedToken } = require('../util');
 
 const authenticateUser = async (req, res, next) => {
-  const token = req.signedCookies.token; // because we named as token in jwt.js when we attach to res to cookie
+  if (req.method === 'OPTIONS') {
+    return next();
+  }
+  const token = req.headers.authorization.split(' ')[1]; // Bearer Token
   if (!token) {
     throw new CustomError.UnauthenticatedError(
       'Authentication Invalid, no token found'

@@ -29,7 +29,7 @@ app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 app.use(
   cors({
     origin: 'https://yourplaces-6bee5.web.app', // Replace with your actual frontend domain
-    credentials: true, // Allow sessions and cookies
+    credentials: true,
   })
 );
 
@@ -61,7 +61,7 @@ const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
     app.listen(process.env.PORT || 5000, () => {
-      console.log(`Server is listening on port ${port}`);
+      console.log(`Server is listening on port ${process.env.PORT || port}`);
     });
   } catch (error) {
     console.log(error);
